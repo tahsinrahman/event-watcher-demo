@@ -66,7 +66,13 @@ func (r *eventReconciler) Reconcile(request ctrl.Request) (ctrl.Result, error) {
 		return ctrl.Result{}, err
 	}
 
-	oneliners.PrettyJson(event)
+	filter := []string{"Started"}
+
+	for _, reason := range filter {
+		if reason == event.Reason {
+			oneliners.PrettyJson(event)
+		}
+	}
 
 	return ctrl.Result{}, nil
 }
